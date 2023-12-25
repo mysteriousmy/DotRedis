@@ -2,7 +2,6 @@
 using System.IO.Pipelines;
 using System.Text;
 using Microsoft.AspNetCore.Connections;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace KestrelRedis;
 

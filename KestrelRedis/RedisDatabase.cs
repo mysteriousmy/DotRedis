@@ -30,7 +30,7 @@ public class RedisDatabase
         var count = 0;
         foreach (var key in keys)
         {
-
+            _data.Remove(key);
         }
         return count;
     }
