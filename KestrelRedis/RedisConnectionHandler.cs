@@ -47,7 +47,7 @@ public class RedisConnectionHandler(RedisServer server) : ConnectionHandler
         }
     }
 
-    private string[] ParseCommand(ref ReadOnlySequence<byte> buffer)
+    private string[]? ParseCommand(ref ReadOnlySequence<byte> buffer)
     {
         if (buffer.IsSingleSegment)
         {

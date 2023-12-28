@@ -5,15 +5,9 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 
 namespace KestrelRedis;
 
-public class RedisServer
+public class RedisServer(int port)
 {
-    private readonly IWebHost _host;
-    private readonly RedisDatabase _db;
-
-    // Add a parameter to the constructor to receive the port number
-    public RedisServer(int port)
-    {
-        _host = new WebHostBuilder()
+    private readonly IWebHost _host = new WebHostBuilder()
             .UseKestrel(options =>
             {
                 options.Listen(IPAddress.Any, port, listenOptions =>
@@ -23,9 +17,7 @@ public class RedisServer
             })
             .UseStartup<Startup>()
             .Build();
-
-        _db = new RedisDatabase();
-    }
+    private readonly RedisDatabase _db = new RedisDatabase();
 
     public async Task StartAsync()
     {

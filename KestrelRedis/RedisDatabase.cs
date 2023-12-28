@@ -4,8 +4,8 @@ namespace KestrelRedis;
 
 public class RedisDatabase
 {
-    
-    private readonly Dictionary<string, string> _data;
+    //dictionary is not concrruent safe, make it safe
+    private readonly ConcurrentDictionary<string, string> _data;
 
     public RedisDatabase()
     {
@@ -17,7 +17,7 @@ public class RedisDatabase
         _data[key] = value;
     }
 
-    public string Get(string key)
+    public string? Get(string key)
     {
         if (_data.TryGetValue(key, out var value))
         {
@@ -31,7 +31,7 @@ public class RedisDatabase
         var count = 0;
         foreach (var key in keys)
         {
-            _data.Remove(key);
+            _data.Remove(key, out _);
         }
         return count;
     }
