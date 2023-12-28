@@ -14,6 +14,8 @@ sealed class RedisRequest
 
     public int ArgumentCount => this.values.Count - 1;
 
+    public List<RedisValue> Arguments => this.values[1..];
+
     private RedisRequest()
     {
     }

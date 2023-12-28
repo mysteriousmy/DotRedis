@@ -1,6 +1,6 @@
 namespace KestrelRedisEncap;
 
-sealed class QuitHandler : IRedisCmdHanler
+sealed class QuitHandler : IRedisCmdHandler
 {
     public RedisCmd Cmd => RedisCmd.Quit;
 

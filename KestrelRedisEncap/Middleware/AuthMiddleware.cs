@@ -12,7 +12,7 @@ sealed class AuthMiddleware(ILogger<AuthMiddleware> logger, IOptionsMonitor<Redi
     {
         if (context.Client.IsAuthed == false)
         {
-            await context.Response.WriteAsync(ResponseContent.Err);
+            await context.Response.WriteAsync(ResponseContent.Err(" auth failed"));
         }
         else if (context.Client.IsAuthed == true)
         {
@@ -28,7 +28,7 @@ sealed class AuthMiddleware(ILogger<AuthMiddleware> logger, IOptionsMonitor<Redi
             else
             {
                 this.logger.LogWarning("需要客户端Auth");
-                await context.Response.WriteAsync(ResponseContent.Err);
+                await context.Response.WriteAsync(ResponseContent.Err(" need client auth"));
             }
         }
         else

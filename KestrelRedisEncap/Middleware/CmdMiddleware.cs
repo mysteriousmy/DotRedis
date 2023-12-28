@@ -3,9 +3,9 @@ namespace KestrelRedisEncap;
 
 sealed class CmdMiddleware : IRedisMiddleware
 {
-    private readonly Dictionary<RedisCmd, IRedisCmdHanler> cmdHandlers;
+    private readonly Dictionary<RedisCmd, IRedisCmdHandler> cmdHandlers;
 
-    public CmdMiddleware(IEnumerable<IRedisCmdHanler> cmdHanlers)
+    public CmdMiddleware(IEnumerable<IRedisCmdHandler> cmdHanlers)
     {
         this.cmdHandlers = cmdHanlers.ToDictionary(item => item.Cmd, item => item);
     }

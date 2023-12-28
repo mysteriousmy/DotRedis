@@ -1,5 +1,5 @@
 namespace KestrelRedisEncap;
-sealed class PingHandler : IRedisCmdHanler
+sealed class PingHandler : IRedisCmdHandler
 {
     public RedisCmd Cmd => RedisCmd.Ping;
 

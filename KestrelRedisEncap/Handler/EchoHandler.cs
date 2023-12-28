@@ -1,8 +1,9 @@
 namespace KestrelRedisEncap;
 
-sealed class EchoHandler : IRedisCmdHanler
+sealed class EchoHandler : IRedisCmdHandler
 {
     public RedisCmd Cmd => RedisCmd.Echo;
+    
 
     /// <summary>
     /// 处理请求

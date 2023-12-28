@@ -8,7 +8,7 @@ namespace KestrelRedisEncap;
 /// Auth处理者
 /// </summary>
 /// <param name="options"></param>
-sealed class AuthHandler(IOptionsMonitor<RedisOptions> options) : IRedisCmdHanler
+sealed class AuthHandler(IOptionsMonitor<RedisOptions> options) : IRedisCmdHandler
 {
     private readonly IOptionsMonitor<RedisOptions> options = options;
 
@@ -44,7 +44,7 @@ sealed class AuthHandler(IOptionsMonitor<RedisOptions> options) : IRedisCmdHanle
         }
         else
         {
-            await context.Response.WriteAsync(ResponseContent.Err);
+            await context.Response.WriteAsync(ResponseContent.Err(""));
         }
     }
 }

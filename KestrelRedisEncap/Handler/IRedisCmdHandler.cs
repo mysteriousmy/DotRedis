@@ -1,6 +1,6 @@
 namespace KestrelRedisEncap;
 
-interface IRedisCmdHanler
+interface IRedisCmdHandler
 {
     RedisCmd Cmd {get;}
 

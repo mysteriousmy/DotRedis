@@ -23,7 +23,7 @@ public static partial class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddRedis(this IServiceCollection services)
     {
-        var serviceType = typeof(IRedisCmdHanler);
+        var serviceType = typeof(IRedisCmdHandler);
         var cmdHandlerTypes = serviceType.Assembly.GetTypes()
             .Where(item => serviceType.IsAssignableFrom(item))
             .Where(item => item.IsClass && item.IsAbstract == false);

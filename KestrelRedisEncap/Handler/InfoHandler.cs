@@ -1,6 +1,6 @@
 namespace KestrelRedisEncap;
 
-sealed class InfoHandler : IRedisCmdHanler
+sealed class InfoHandler : IRedisCmdHandler
 {
     public RedisCmd Cmd => RedisCmd.Info;
 

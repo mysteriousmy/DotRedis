@@ -32,6 +32,7 @@ public sealed class RedisConnectionHandler(IServiceProvider appServices, ILogger
         var input = context.Transport.Input;
         var client = new RedisClient(context);
         var response = new RedisResponse(context.Transport.Output);
+        var database = new RedisDatabase();
 
         while (context.ConnectionClosed.IsCancellationRequested == false)
         {
@@ -46,7 +47,7 @@ public sealed class RedisConnectionHandler(IServiceProvider appServices, ILogger
             {
                 foreach (var request in requests)
                 {
-                    var redisContext = new RedisContext(client, request, response, context.Features);
+                    var redisContext = new RedisContext(client, request, response, database, context.Features);
                     await this.redisServer.Invoke(redisContext);
                 }
                 input.AdvanceTo(consumed);

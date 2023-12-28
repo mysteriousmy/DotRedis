@@ -12,13 +12,32 @@ abstract class ResponseContent
     /// <summary>
     /// Error
     /// </summary>
-    public static ResponseContent Err { get; } = new StringContent("-ERR\r\n");
 
     /// <summary>
     /// pong
     /// </summary>
     public static ResponseContent Pong { get; } = new StringContent("+PONG\r\n");
 
+    public static ResponseContent Null { get; } = new StringContent("$-1\r\n");
+
+    internal static ResponseContent Err(string message)
+    {
+        return new StringContent($"-ERR{message}\r\n");
+    }
+
+    internal static ResponseContent GenErr(string method)
+    {
+        return Err($" wrong number of arguments for {method} command");
+    }
+    internal static ResponseContent Value(string result)
+    {
+        return new StringContent($"${result.Length}\r\n{result}\r\n");
+    }
+    
+    internal static ResponseContent Option(int result)
+    {
+        return new StringContent($":{result}\r\n");
+    }
 
     public abstract ReadOnlyMemory<byte> ToMemory();
 

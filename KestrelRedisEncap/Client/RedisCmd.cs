@@ -15,4 +15,7 @@ enum RedisCmd
     Info,
 
     Select,
+    Set,
+    Get,
+    Del,
 }

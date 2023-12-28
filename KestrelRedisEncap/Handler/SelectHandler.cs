@@ -1,6 +1,6 @@
 namespace KestrelRedisEncap;
 
-sealed class SelectHandler : IRedisCmdHanler
+sealed class SelectHandler : IRedisCmdHandler
 {
     public RedisCmd Cmd => RedisCmd.Select;
 

@@ -9,7 +9,7 @@ namespace KestrelRedisEncap;
 /// <param name="request"></param>
 /// <param name="response"></param>
 /// <param name="features"></param> 
-sealed class RedisContext(RedisClient client, RedisRequest request, RedisResponse response, IFeatureCollection features) : RedisApplicationContext(features)
+sealed class RedisContext(RedisClient client, RedisRequest request, RedisResponse response, RedisDatabase database, IFeatureCollection features) : RedisApplicationContext(features)
 {
     /// <summary>
     /// 获取redis客户端
@@ -25,6 +25,11 @@ sealed class RedisContext(RedisClient client, RedisRequest request, RedisRespons
     /// 获取redis响应
     /// </summary>
     public RedisResponse Response { get; } = response;
+
+    /// <summary>
+    /// 获取redis数据库本体
+    /// </summary>
+    public RedisDatabase Database {get; } = database;
 
     public override string ToString()
     {
