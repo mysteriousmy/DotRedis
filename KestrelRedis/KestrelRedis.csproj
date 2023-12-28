@@ -4,10 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <PublishAot>false</PublishAot>
+    <PublishAot>true</PublishAot>
     <PublishTrimmed>true</PublishTrimmed>
-    <ServerGarbageCollection>true</ServerGarbageCollection>
-    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <PublishSingleFile>false</PublishSingleFile>
+    <StripSymbols>false</StripSymbols>
+    <OptimizationPreference>Speed</OptimizationPreference>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
   </PropertyGroup>
 
 </Project>
