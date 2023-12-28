@@ -4,7 +4,6 @@ namespace KestrelRedis;
 
 public class RedisDatabase
 {
-    //dictionary is not concrruent safe, make it safe
     private readonly ConcurrentDictionary<string, string> _data;
 
     public RedisDatabase()

@@ -26,13 +26,13 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // Add any services you need here
+
         services.AddSingleton(a => new RedisServer(6379));
         services.AddSingleton<RedisConnectionHandler>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        // Add any middleware you need here
+
     }
 }
