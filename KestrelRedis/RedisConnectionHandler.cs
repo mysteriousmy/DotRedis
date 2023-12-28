@@ -5,15 +5,11 @@ using Microsoft.AspNetCore.Connections;
 
 namespace KestrelRedis;
 
-public class RedisConnectionHandler : ConnectionHandler
+public class RedisConnectionHandler(RedisServer server) : ConnectionHandler
 {
-    private readonly RedisServer _server;
-
-    public RedisConnectionHandler(RedisServer server)
-    {
-        _server = server;
-    }
-
+    
+    private readonly RedisServer _server = server;
+    
     public override async Task OnConnectedAsync(ConnectionContext connection)
     {
         //System.Console.WriteLine("Client connected: {0}", connection.ConnectionId);
@@ -114,6 +110,7 @@ public class RedisConnectionHandler : ConnectionHandler
                 return "-ERR unknown command '" + command[0] + "'\r\n";
         }
     }
+
     private async Task WriteResponseAsync(PipeWriter pipeWriter, string response)
     {
         var bytes = Encoding.UTF8.GetBytes(response);

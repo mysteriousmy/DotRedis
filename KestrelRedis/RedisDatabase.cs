@@ -4,11 +4,12 @@ namespace KestrelRedis;
 
 public class RedisDatabase
 {
+    
     private readonly Dictionary<string, string> _data;
 
     public RedisDatabase()
     {
-        _data = new Dictionary<string, string>();
+        _data = [];
     }
 
     public void Set(string key, string value)

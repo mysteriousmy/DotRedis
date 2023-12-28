@@ -15,10 +15,12 @@ class Program
             await server.StopAsync();
             Environment.Exit(0);
         };
+
         await server.StartAsync();
         Console.WriteLine("Press Ctrl+C to exit");
         await Task.Delay(-1);
     }
+
 }
 public class Startup
 {
