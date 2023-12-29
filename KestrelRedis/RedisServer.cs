@@ -1,6 +1,5 @@
 using System.Net;
 using Microsoft.AspNetCore.Connections;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 
 namespace KestrelRedis;
@@ -17,7 +16,7 @@ public class RedisServer(int port)
             })
             .UseStartup<Startup>()
             .Build();
-    private readonly RedisDatabase _db = new RedisDatabase();
+    private RedisCommandDelegate _commandDelegate = new(new RedisDatabase());
 
     public async Task StartAsync()
     {
@@ -30,9 +29,9 @@ public class RedisServer(int port)
         await _host.StopAsync();
         Console.WriteLine("Redis server stopped");
     }
-
-    public RedisDatabase GetDatabase()
+    public RedisCommandDelegate GetCommandDelegate()
     {
-        return _db;
+        return _commandDelegate;
     }
+
 }

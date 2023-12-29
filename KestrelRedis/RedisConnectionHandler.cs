@@ -7,9 +7,9 @@ namespace KestrelRedis;
 
 public class RedisConnectionHandler(RedisServer server) : ConnectionHandler
 {
-    
+
     private readonly RedisServer _server = server;
-    
+
     public override async Task OnConnectedAsync(ConnectionContext connection)
     {
         //System.Console.WriteLine("Client connected: {0}", connection.ConnectionId);
@@ -62,53 +62,18 @@ public class RedisConnectionHandler(RedisServer server) : ConnectionHandler
 
     private string ExcuteCommand(string[] command)
     {
-        var db = _server.GetDatabase();
-        //System.Console.WriteLine(command[2]);
-        switch (command[2].ToUpper())
+        var commandHandler = _server.GetCommandDelegate().GetCommandHandlers();
+        var commandType = command[2].ToUpper();
+        if (commandHandler.TryGetValue(commandType, out RedisCommandDelegate.CommandHandler? value))
         {
-            case "PING":
-                return "+PONG\r\n";
-            case "SET":
-                if (command.Length >= 3)
-                {
-                    db.Set(command[4], command[6]);
-                    //System.Console.WriteLine(command[4]);
-                    return "+OK\r\n";
-                }
-                else
-                {
-                    return "-ERR wrong number of arguments for 'set' command\r\n";
-                }
-            case "GET":
-                if (command.Length >= 2)
-                {
-                    var value = db.Get(command[4]);
-                    if (value != null)
-                    {
-                        return "$" + value.Length + "\r\n" + value + "\r\n";
-                    }
-                    else
-                    {
-                        return "$-1\r\n";
-                    }
-                }
-                else
-                {
-                    return "-ERR wrong number of arguments for 'get' command\r\n";
-                }
-            case "DEL":
-                if (command.Length > 1)
-                {
-                    var count = db.Delete(command[1..]);
-                    return ":" + count + "\r\n";
-                }
-                else
-                {
-                    return "-ERR wrong number of arguments for 'del' command\r\n";
-                }
-            default:
-                return "-ERR unknown command '" + command[0] + "'\r\n";
+            var handler = value;
+            return handler(command);
         }
+        else
+        {
+            return "-ERR unknown command '" + command[0] + "'\r\n";
+        }
+
     }
 
     private async Task WriteResponseAsync(PipeWriter pipeWriter, string response)
