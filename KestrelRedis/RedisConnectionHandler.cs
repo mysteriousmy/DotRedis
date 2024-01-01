@@ -47,7 +47,7 @@ public class RedisConnectionHandler(RedisServer server) : ConnectionHandler
         }
     }
 
-    private string[]? ParseCommand(ref ReadOnlySequence<byte> buffer)
+    private static string[]? ParseCommand(ref ReadOnlySequence<byte> buffer)
     {
         if (buffer.IsSingleSegment)
         {
@@ -76,7 +76,7 @@ public class RedisConnectionHandler(RedisServer server) : ConnectionHandler
 
     }
 
-    private async Task WriteResponseAsync(PipeWriter pipeWriter, string response)
+    private static async ValueTask WriteResponseAsync(PipeWriter pipeWriter, string response)
     {
         var bytes = Encoding.UTF8.GetBytes(response);
         await pipeWriter.WriteAsync(bytes);

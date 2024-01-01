@@ -1,8 +1,14 @@
+using System.Net;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace KestrelRedis;
 class Program
 {
     static async Task Main(string[] args)
     {
+        ServicePointManager.DefaultConnectionLimit = int.MaxValue;
         var port = 6379;
         if (args.Length > 0 && int.TryParse(args[0], out var p))
         {
